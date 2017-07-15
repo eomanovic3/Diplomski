@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+z
+<div class="logujSeOkolina">
+    <img src="~/Content/koo.png" id="logoSlika" alt="Logo" >
+    <img src="@Url.Action("UserPhotos", "Home" )" style="width:160px;height:160px; background: #FFFFFF;
+    margin: auto;
+    -moz-border-radius: 60px;
+    border-radius: 100px;
+    padding: 6px;
+    box-shadow: 0px 0px 20px #888;" />
+    </h1> 
+    <!--<h1>It's hard to beat a person who never gives up.</h1>-->
+    <h1>                       </h1>
+    @if (@HttpContext.Current.User.Identity.Name.IsEmpty())
+    {
+        <div class="span2">
+            <p><button type="submit" class="btn btn-primary btn-block bojaPocetna">Register for free !</button></p>
+        </div>    }
+    
+</div>
+<div class="donjiDioPocetne">
+    <div id="prvi"><img class="slikePocetna" src="~/Content/9-128.png" /><p class="nasloviIspod">Jobs</p><p class="opisSlike">Find the right job for your lifestyle and have new offers sent to you automatically.</p></div>
+    <div id="drugi"><img class="slikePocetna" src="~/Content/novosti.png" /><p class="nasloviIspod">News</p><p class="opisSlike">Top daily articles from your industry. Find out more and add your own perspective!</p></div>
+    <div id="treci"><img class="slikePocetna" src="~/Content/event.png" /><p class="nasloviIspod">Events</p><p class="opisSlike">Discover great seminars, conferences, trade shows, and more at the largest business event platform.</p></div>
+    <div id="cetvrti"><img class="slikePocetna" src="~/Content/companies-128.png" /><p class="nasloviIspod">Companies</p><p class="opisSlike">Find the best and most popular employers with top ratings in your city or industry.</p></div>
+</div>

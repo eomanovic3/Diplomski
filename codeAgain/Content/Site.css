@@ -1,0 +1,39 @@
+﻿#logoSlika {
+    max-width:40%;
+    max-height:40%;
+}
+.w3-main, #main {
+    transition: margin-left .4s;
+    margin-top: 70px;
+    position: absolute !important;
+}
+.w3-teal, .w3-hover-teal:hover {
+    color: #fff !important;
+    background-color: #ffffff !important;
+}
+.fa{
+    color:black;
+    font-size:2em;
+}
+.col-md-1 {
+    width: 3%;
+}
+@media (min-width: 992px){
+ .col-md-1 {
+        width: 3%;
+    }
+}
+.col-md-11 {
+    width: 97%;
+}
+
+@media (min-width: 992px) {
+    .col-md-11 {
+        width: 97%;
+    }
+}
+.logoNavbar{
+    max-height:10%;
+    max-width:10%;
+
+}
