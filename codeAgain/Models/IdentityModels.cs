@@ -33,10 +33,9 @@ namespace IdentitySample.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("SQLAzureConnection", throwIfV1Schema: false)
         {
         }
-
         static ApplicationDbContext()
         {
             // Set the database intializer which is run once during application start
