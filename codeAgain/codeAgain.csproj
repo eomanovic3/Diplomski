@@ -290,6 +290,8 @@
     <None Include="Properties\PublishProfiles\aplikacijaEO - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\codeAgainApp - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\codeAgainApp - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\mojaNovaAplikacija - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\mojaNovaAplikacija - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\novaApp123 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
