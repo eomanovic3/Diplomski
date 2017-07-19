@@ -5,12 +5,16 @@
 
 <div class="logujSeOkolina">
     <img src="~/Content/koo.png" id="logoSlika" alt="Logo" >
-    <img src="@Url.Action("UserPhotos", "Home" )" style="width:160px;height:160px; background: #FFFFFF;
+@if (!@HttpContext.Current.User.Identity.Name.IsEmpty())
+{
+
+    <img src="@Url.Action("UserPhotos", "Home")" style="width:160px;height:160px; background: #FFFFFF;
     margin: auto;
     -moz-border-radius: 60px;
     border-radius: 100px;
     padding: 6px;
     box-shadow: 0px 0px 20px #888;" />
+}
     </h1> 
     <!--<h1>It's hard to beat a person who never gives up.</h1>-->
     <h1>                       </h1>
