@@ -2,7 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-z
+
 <div class="logujSeOkolina">
     <img src="~/Content/koo.png" id="logoSlika" alt="Logo" >
     <img src="@Url.Action("UserPhotos", "Home" )" style="width:160px;height:160px; background: #FFFFFF;
@@ -17,7 +17,7 @@ z
     @if (@HttpContext.Current.User.Identity.Name.IsEmpty())
     {
         <div class="span2">
-            <p><button type="submit" class="btn btn-primary btn-block bojaPocetna">Register for free !</button></p>
+            <p><button type="submit" onclick="@("window.location.href='" + @Url.Action("Register", "Account") + "'");" class="btn btn-primary btn-block bojaPocetna">Register for free !</button></p>
         </div>    }
     
 </div>

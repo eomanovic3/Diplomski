@@ -13,6 +13,7 @@ using System.Net.Mail;
 using System.Web.Services.Description;
 using System.Net.Mime;
 using System.IO;
+using System.Web.Security;
 
 namespace IdentitySample.Controllers
 {
@@ -50,7 +51,7 @@ namespace IdentitySample.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
+       
         private ApplicationSignInManager _signInManager;
 
         public ApplicationSignInManager SignInManager

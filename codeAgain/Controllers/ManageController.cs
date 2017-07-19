@@ -252,7 +252,7 @@ namespace IdentitySample.Controllers
             AddErrors(result);
             return View(model);
         }
-
+        
         //
         // GET: /Manage/SetPassword
         public ActionResult SetPassword()
