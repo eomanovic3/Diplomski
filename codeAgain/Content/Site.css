@@ -195,8 +195,7 @@ h2 {
 .container {
     background-color: silver;
     max-width: 100%;
-    padding: 0;
-    margin: 0px auto;
+    max-height: 100%;
 }
 /* Set width on the form input elements since they're 100% wide by default */
 input,
@@ -206,7 +205,6 @@ textarea {
 }
 
 .donjiDioPocetne {
-  padding-bottom:20px;
   margin-top:7%;
 }
 
