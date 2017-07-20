@@ -55,11 +55,9 @@ h1 {
 }
 
 h2 {
-    color: white;
+    color: black;
     text-align: center;
-    text-shadow: 2px 2px black;
-    font-family: 'Harlow Solid';
-    font-size: 78px;
+    font-size: 40px;
 }
 
 .navbar-collapse {
