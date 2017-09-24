@@ -1,0 +1,157 @@
+﻿@model IEnumerable<codeApp.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "List of your followings";
+}
+
+<h2>Available companies</h2>
+@using Microsoft.AspNet.Identity;
+@using codeApp.Models;
+@using codeApp.Controllers;
+<html>
+<body>
+
+    <table class="table" style="max-width:100%;  background-color:ghostwhite">
+        <tr>
+            <th>
+
+            </th>
+            <th>
+
+            </th>
+            <th>
+
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            if (item.Email != User.Identity.Name && item.UserType.ToString().Equals("Employer"))
+            {
+                <tr>
+                    <td>
+                        @{string imgSrc = null;
+
+                            if (item.ImageFileContent != null)
+                            {
+                                var base64 = Convert.ToBase64String(item.ImageFileContent);
+                                imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                <div class="frame" style="max-height:40%; max-width:100%;">
+                                    <span class="helper"></span>
+                                    <img src="@imgSrc" class="slikaJob" style="max-height:80%; max-width:80%;" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="frame">
+                                    <span class="helper"></span>
+
+                                    <img src="~/img/nopic.png" class="slikaJob" />
+                                </div>
+                            }
+                        }
+
+                    </td>
+                    <td>
+
+                        @if (item.FirstName != null)
+                        {
+                            <a style="font-family:'Times New Roman';font-size:1.8em;">
+                                @Html.DisplayFor(model => item.FirstName) @Html.DisplayFor(modelitem => item.LastName) <br />
+                            </a> @Html.DisplayFor(model => item.City)
+                        }
+                        else
+                        {
+                            <a style="font-family:'Times New Roman';font-size:1.8em;">
+                                @Html.DisplayFor(model => item.CompanyName)<br />
+                            </a>
+                                @Html.DisplayFor(modelitem => item.CompanyDescription) <br />
+                        }
+                        <br />
+                        <div>
+                            @if (((HomeController)this.ViewContext.Controller).CheckUserFollowings(item.Id) == 0)
+                            {
+                                <input name="submit" type="button" value="Follow" id="@item.Id" class="Follow btn btn-success" style="background-color:forestgreen;" />
+                            }
+                            else
+                            {
+                                <input name="submit" type="button" value="Unfollow" id="@item.Id" class="Unfollow btn btn-danger" style="background-color:indianred;" />
+                            }
+
+                        </div>
+                    </td>
+                    <td>
+                        @if (item.FirstName != null)
+                    {
+                            <a style="font-family:'Times New Roman';font-size:1.8em;">
+                                @Html.DisplayFor(model => item.Email)  <br />
+                            </a>
+                            <p>
+                                Address: @Html.DisplayFor(model => item.Address)<br />
+                                Phone: @Html.DisplayFor(model => item.PhoneNumber)<br />
+                            </p>
+                        }
+                        else
+                        {
+                            <a style="font-family:'Times New Roman';font-size:1.8em;">
+                                @Html.DisplayFor(model => item.Email)  <br />
+                            </a>
+                            <p>
+                                Address: @Html.DisplayFor(model => item.CompanyAddress)<br />
+                                Description:  @Html.DisplayFor(model => item.CompanyDescription)<br />
+                                Phone:   @Html.DisplayFor(model => item.PhoneNumber)<br />
+                            </p>
+                        }
+
+                    </td>
+                </tr>
+                                }
+                            }
+    </table>
+
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
+<script>
+
+
+    $(".Follow").click(function (e) {
+        if (!window.confirm("Follow this user?")) {
+            e.preventDefault();
+        }
+        else {
+            $(this).hasClass('.Unfollow');
+            $(this).css("background", "indianred");
+            $(this).val("Unfollow");
+            var id = e.target.id;
+            $.ajax({
+                url: '/Home/SaveFollowingsDetails',
+                data: { id: id }
+            }).done(function () {
+
+                location.reload();
+            });
+        }
+    });
+
+    $(".Unfollow").click(function (e) {
+        if (!window.confirm("Unfollow this user?")) {
+            e.preventDefault();
+        }
+        else {
+            var id = e.target.id;
+            $(this).val("Follow");
+            $(this).text("Follow");
+            $(this).css("background", "forestgreen");
+            $(this).hasClass('.Follow this user?');
+            $.ajax({
+                url: '/Home/DeleteUserFollowings',
+                data: { id: id }
+            }).done(function () {
+                alert('Unfollow');
+                location.reload();
+            });
+        }
+    });
+
+</script>

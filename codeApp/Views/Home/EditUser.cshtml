@@ -1,0 +1,124 @@
+﻿@model codeApp.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Edit your Account data";
+}
+<div class="row inputForm">
+    <div class="col-md-12">
+
+        <h2>Account</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal ">
+                @if (ViewData["UserType"].Equals("Unemployed"))
+                {
+                    <h4>Give us more details about yourself!</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
+
+                    <div class="form-group">
+                        <div>
+                            <label>First Name</label>
+                            @if (User.Identity.IsAuthenticated)
+                            { @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = (ViewData["FirstNameTry"]) } })
+                            }@Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label>Last Name</label>
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = (ViewData["LastName"]) } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label>Phone number</label>
+                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control  ", placeholder = (ViewData["PhoneNumber"]) } })
+                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label>Address</label>
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control ", placeholder = (ViewData["Address"]) } })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label>City</label>
+                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control ", placeholder = (ViewData["City"]) } })
+                            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="" form-control col-md-7">
+                            <input type="submit" value="Save" style="width:100%;" class="btn btn-info" />
+                        </div>
+                    </div>
+                }
+                else if (ViewData["UserType"].Equals("Employer"))
+                {
+                    <h4>Give us more details about your company!</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
+
+                    <div class="form-group">
+                        <div>
+                            <label>Company Name</label>
+                            @if (User.Identity.IsAuthenticated)
+                            { @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control", placeholder = (ViewData["CompanyName"]) } })
+                            }@Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label>Address of your company</label>
+                            @Html.EditorFor(model => model.CompanyAddress, new { htmlAttributes = new { @class = "form-control", placeholder = (ViewData["CompanyAddress"]) } })
+                            @Html.ValidationMessageFor(model => model.CompanyAddress, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label>Contact number</label>
+                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control  ", placeholder = (ViewData["PhoneNumber"]) } })
+                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label>Describe your company</label>
+                            @Html.EditorFor(model => model.CompanyDescription, new { htmlAttributes = new { @class = "form-control  ", placeholder = (ViewData["CompanyDescription"]) } })
+                            @Html.ValidationMessageFor(model => model.CompanyDescription, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <div class="" form-control col-md-7">
+                            <input type="submit" value="Save" style="width:100%;" class="btn btn-info" />
+                        </div>
+                    </div>
+                }
+            </div>
+
+        }
+
+
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+    </div>
+</div>

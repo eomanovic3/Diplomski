@@ -1,0 +1,62 @@
+﻿@model IEnumerable<codeApp.Models.UserEdit>
+
+<table class="table table-bordered" style="margin-top:5%;">
+    <tr>
+        <th class="col-md-4">
+            @Html.DisplayNameFor(model => model.FileName)
+        </th>
+
+        <th>
+            Download
+        </th>
+        <th>
+            Delete
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.FileName != null && item.Email.Equals(User.Identity.Name) && (ViewData["UserType"]).Equals("Unemployed"))
+        {
+            <tr>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Download", "DownLoadFile", new { id = item.FileId })
+
+                </td>
+
+                <td>
+                    @Html.ActionLink("Delete", "DeleteFile", new { id = item.FileId })
+
+                </td>
+            </tr>}
+
+
+        else if ((ViewData["UserType"]).Equals("Employer") && item.FileName != null)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Download", "DownLoadFile", new { id = item.FileId })
+
+                </td>
+
+                <td>
+                    @Html.ActionLink("Delete", "DeleteFile", new { id = item.FileId })
+
+                </td>
+            </tr>
+        }
+
+    }
+</table>
+
+

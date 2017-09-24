@@ -1,0 +1,162 @@
+﻿@model  codeApp.Models.ApplicationUser
+@{
+    ViewBag.Title = "DetailsOfUser";
+}
+@if (Model.UserType.ToString().Equals("Unemployed"))
+{
+    <h2>Account data</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Image
+            </th>
+        </tr>
+        <tr style="text-align:unset;">
+            <td>
+                @Html.DisplayFor(model => model.FirstName)
+            </td>
+            <td>
+                @{
+                    string imgSrc = null;
+                }
+                @if (Model.ImageFileContent != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.ImageFileContent);
+                    imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    <img src="@imgSrc" style="max-width:120px; max-height:120px;" />
+                }
+                else
+                {
+                    <img src="~/img/nopic.png" style="max-width:120px; max-height:120px;" />
+                }
+            </td>
+        </tr>
+
+
+    </table>
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserType)
+            </th>
+            <th></th>
+        </tr>
+        <tr style="text-align:unset;">
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.UserType)
+            </td>
+            <td></td>
+        </tr>
+    </table>
+                    }
+                    else if (Model.UserType.ToString().Equals("Employer"))
+                    {
+
+                        <h2>Company data</h2>
+                        <table class="table table-striped">
+                            <tr>
+                                <th style="text-align:center;">
+                                    Company Name
+                                </th>
+                            </tr>
+                            <tr style="text-align:unset;">
+                                <td style="text-align:center;">
+                                    @Html.DisplayFor(modelItem => modelItem.CompanyName)
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table table-striped">
+                            <tr>
+                                <th style="text-align:center;">
+                                    Company Logo
+                                </th>
+                            </tr>
+                            <tr style="text-align:unset;">
+                                <td style="text-align:center;">
+                                    @{
+                                        string imgSrc = null;
+                                    }
+                                    @if (Model.ImageFileContent != null)
+                                    {
+                                        var base64 = Convert.ToBase64String(Model.ImageFileContent);
+                                        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                        <img src="@imgSrc" style="max-width:120px; max-height:120px;" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/img/nopic.jpg" style="max-width:120px; max-height:120px;" />
+                                    }
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.CompanyAddress)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.CompanyDescription)
+                                </th>
+                            </tr>
+                            <tr style="text-align:unset;">
+                                <td>
+                                    @Html.DisplayFor(modelItem => modelItem.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => modelItem.PhoneNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => modelItem.CompanyAddress)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => modelItem.CompanyDescription)
+                                </td>
+                            </tr>
+                        </table>
+
+                                        }

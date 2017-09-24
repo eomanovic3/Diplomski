@@ -1,0 +1,44 @@
+﻿@model IEnumerable<codeApp.Models.ImageEdit>
+@using Microsoft.AspNet.Identity
+
+
+<table class="table table-bordered" style="text-align:center; margin-top:5%;" >
+    <tr>
+        <th  style="text-align:center;">
+            @Html.DisplayNameFor(model => model.ImageFileName)
+        </th>
+        <th style="text-align:center;">
+            @Html.DisplayNameFor(model => model.ImageFileContent)
+        </th>
+        <th style="text-align:center;"> Delete file</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @if (item.ImageFileName != null && item.Email.Equals(User.Identity.Name))
+        {
+         <td>
+            @Html.DisplayFor(modelItem => item.ImageFileName)
+        </td>
+        <td>
+           @{
+                        var base64 = Convert.ToBase64String(item.ImageFileContent);
+                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+           }
+
+            <img src="@imgSrc" style="max-width:120px; max-height:120px;" />
+
+
+
+         </td>
+
+
+         <td>
+             @Html.ActionLink("Delete", "ImageDeleteFile", new { id = item.ImageFileId })
+             
+         </td>
+        } 
+    </tr>
+}
+
+</table>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<codeApp.Models.JobApplications>
+@using Microsoft.AspNet.Identity.Owin;
+@using Microsoft.Owin.Security;
+@using Microsoft.AspNet.Identity.EntityFramework;
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "All applications on one place";
+}
+
+<h2>All applications on one place</h2>
+@{
+    var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+}
+
+   
+@foreach (var item in Model)
+{
+    <table class="table table-striped table-inverse" style="margin-left:3%; margin-right:3%; width:90%;" >
+         @{
+             var user = UserManager.FindById(item.UserId);
+         }
+
+        <tr>
+            <th> Full name of a user</th>            
+            <th> Phonenumber</th>
+            <th>
+                CV file name
+            </th>
+            <th>
+                Download
+            </th>
+
+        </tr>
+        <tr>
+            <td>
+                @if (user.FirstName != null)
+                {
+                    @user.FirstName <span style="display:inline-block; width: 3px;"></span> @user.LastName}
+                else
+                {
+                    @user.Email;
+                }
+            </td>
+            <td>
+                @user.PhoneNumber
+            </td>
+            <td>@user.FileName</td>
+        <td>
+            @Html.ActionLink("Download", "DownLoadFile", new { id = user.FileId , idUser = user.Id})
+        </td>
+      </tr>
+</table>
+}

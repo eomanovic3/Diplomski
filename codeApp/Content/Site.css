@@ -1,0 +1,257 @@
+﻿body {
+    /* background-image: url("b12.jpg");
+    background-size: cover;
+    background-repeat: repeat-y;
+    background-position: 50% 50%;*/
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+
+
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 350px;
+}
+
+.Follow {
+    background: rgba(120, 120, 120, 0.7);
+}
+
+    .Follow:hover {
+        background: rgba(120, 120, 120, 0.7);
+        cursor: pointer;
+        background-color:dodgerblue !important;
+    }
+
+.Unfollow {
+    background: rgba(120, 120, 120, 0.7);
+}
+.Unfollow:hover {
+    background: rgba(120, 120, 120, 0.7);
+    cursor: pointer;
+    background-color: red !important;
+}
+
+/*
+    @media (min-width: 992px) {
+    .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+        float: none !important;
+    }
+}
+.row{
+    margin-top:100%;
+}
+#naslov {
+    color: #06d0d8;
+    letter-spacing:0.5em;
+    font-family:Arial, Helvetica, sans-serif;
+}
+*/
+#registration, .inputForm {
+    background-color: white;
+    width: 500px;
+    border-radius: 10% / 10%;
+    padding: 15px;
+    max-height: 60%;
+}
+
+
+input[type=file] {
+    color: transparent;
+    text-align: center;
+    margin: 0;
+}
+
+    input[type=file]:after {
+        color: #000;
+        content: " ";
+    }
+
+
+#first {
+    display: none;
+}
+
+.table-header-rotated th.row-header {
+    width: auto;
+}
+
+.table-header-rotated td {
+    width: 40px;
+    border-top: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.table-header-rotated th.rotate-45 {
+    height: 80px;
+    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    position: relative;
+    vertical-align: bottom;
+    padding: 0;
+    font-size: 12px;
+    line-height: 0.8;
+}
+
+    .table-header-rotated th.rotate-45 > div {
+        position: relative;
+        top: 0px;
+        left: 40px; /* 80 * tan(45) / 2 = 40 where 80 is the height on the cell and 45 is the transform angle*/
+        height: 100%;
+        -ms-transform: skew(-45deg,0deg);
+        -moz-transform: skew(-45deg,0deg);
+        -webkit-transform: skew(-45deg,0deg);
+        -o-transform: skew(-45deg,0deg);
+        transform: skew(-45deg,0deg);
+        overflow: hidden;
+        border-left: 1px solid #dddddd;
+        border-right: 1px solid #dddddd;
+        border-top: 1px solid #dddddd;
+    }
+
+    .table-header-rotated th.rotate-45 span {
+        -ms-transform: skew(45deg,0deg) rotate(315deg);
+        -moz-transform: skew(45deg,0deg) rotate(315deg);
+        -webkit-transform: skew(45deg,0deg) rotate(315deg);
+        -o-transform: skew(45deg,0deg) rotate(315deg);
+        transform: skew(45deg,0deg) rotate(315deg);
+        position: absolute;
+        bottom: 30px; /* 40 cos(45) = 28 with an additional 2px margin*/
+        left: -25px; /*Because it looked good, but there is probably a mathematical link here as well*/
+        display: inline-block;
+        /* width: 100%;*/
+        width: 85px; /* 80 / cos(45) - 40 cos (45) = 85 where 80 is the height of the cell, 40 the width of the cell and 45 the transform angle*/
+        text-align: left;
+        /* white-space: nowrap; /*whether to display in one line or not*/
+    }
+
+h2 {
+    margin-top: 3%;
+}
+
+
+@media (min-width: 992px) {
+    .col-md-1, .col-md-10, .col-md-11, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-7, .col-md-8, .col-md-9 {
+        float: none;
+    }
+}
+@media (min-width: 992px) {
+     .col-md-12, .col-md-6{
+        float: left;
+    }
+}
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    padding-right: 2px !important;
+    padding-left: 2px !important;
+}
+
+#logoutTitle {
+    text-decoration: none;
+    color: black;
+    padding: 4px;
+}
+
+    #logoutTitle:hover {
+        background-color: dimgrey;
+    }
+
+.frame {
+    height: 12em; /* equals max image height */
+    width: 16em;
+    border-radius:10%/10%;
+    background-color: silver;
+    white-space: nowrap;
+    text-align: center;
+    margin: auto;
+    display: block;
+}
+
+.slikaStrijela {
+    height: 17%;
+}
+
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.slikaJob {
+    background-color: transparent;
+    vertical-align: middle;
+    max-height: 160px;
+    max-width: 160px;
+}
+
+#oglas {
+    border: 2px ridge grey;
+}
+
+#imeKompanije {
+    margin-top: 1em;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: Calibri;
+    text-shadow: 2px;
+    letter-spacing: 1px;
+}
+
+.frameDetails {
+    background-color: silver;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .navbar-right {
+        float: right !important;
+        margin-right: 2px;
+    }
+
+    .jnec {
+        max-width: 40%;
+        max-height: 40%;
+        margin: auto;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .body-content {
+        padding-left: 0px;
+        padding-right: 0px;
+        width:100%;
+    }
+}
+
+.splitit {
+    margin-top: 2%;
+}
+
+.naslovi {
+    font-size: 18px;
+    color: #6e6e6e;
+    font-weight: 600;
+    margin-bottom: 5px;
+    margin-top: 5%;
+    text-transform: uppercase;
+}
+
+    .naslovi:hover {
+        text-decoration: none;
+        color: #06d0d8;
+    }
+@media (min-width: 768px) {
+    .container {
+        width: 100%;
+    }
+}

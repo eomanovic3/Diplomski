@@ -1,0 +1,46 @@
+﻿@using codeApp.Models
+@model LoginViewModel
+
+<h2><span style="color:#06d0d8">Lalaland</span></h2>
+<div class="row" id="loginForm">
+    <div class="col-md-12">
+        <section >
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
+            {
+                @Html.AntiForgeryToken()
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control col-md-7", placeholder = "Email" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger"  })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-7">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control col-md-7", placeholder = "Password" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-7">
+                        <input type="submit" value="Sign in" style="width:100%; margin-bottom:2%; " class="btn btn-info dugme  " /><br />
+
+                        <input type="button" value="Register" style="width:100%;"  onclick="location.href='@Url.Action("Register", "Account")'" class="btn btn-group-xs" />
+                       </div>
+                </div>
+               
+                @* Enable this once you have account confirmation enabled for password reset functionality
+                    <p>
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>*@
+            }
+        </section>
+    </div>
+   
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

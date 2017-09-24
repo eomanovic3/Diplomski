@@ -1,0 +1,203 @@
+﻿@model IEnumerable<codeApp.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "ListUser";
+}
+@if (ViewData["UserType"].Equals("Unemployed"))
+{
+    <h2>Your Account data</h2>
+
+
+    <table class="table table-striped" style="margin-left:2%;margin-right:2%;">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Profile image
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.Email.Equals(User.Identity.Name))
+            {
+                <tr style="text-align:unset;">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @{
+                            string imgSrc = null;
+                        }
+                        @if (item.ImageFileContent != null)
+                        {
+                            var base64 = Convert.ToBase64String(item.ImageFileContent);
+                            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                            <img src="@imgSrc" style="max-width:120px; max-height:120px;" />
+                        }
+                        else
+                        {
+                            <img src="~/img/nopic.png" style="max-width:120px; max-height:120px;" />
+                        }
+                    </td>
+                </tr>
+                                }
+
+                            }
+
+    </table>
+
+
+    <table class="table table-striped" style="margin-left:2%;margin-right:2%;">
+        <tr>
+            <th>
+                Email
+            </th>
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+               Telephone
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+               City
+            </th>
+            <th>
+                Type
+            </th>
+
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.Email.Equals(User.Identity.Name))
+            {
+                <tr style="text-align:unset;">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserType)
+                    </td>
+
+
+                    <td></td>
+                </tr>
+            }
+
+        }
+
+    </table>
+                            }
+
+                            else if (ViewData["UserType"].Equals("Employer"))
+                            {
+                                <h2>Your Company data</h2>
+
+
+                                <table class="table table-striped" style="margin-left:2%;margin-right:2%;">
+                                    <tr>
+                                        <th>
+                                            Company name
+                                        </th>
+                                        <th>
+                                            Company Logo
+                                        </th>
+                                    </tr>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        if (item.Email.Equals(User.Identity.Name))
+                                        {
+                                            <tr style="text-align:unset;">
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CompanyName)                                              </td>
+                                                <td>
+                                                    @{
+                                                        string imgSrc = null;
+                                                    }
+                                                    @if (item.ImageFileContent != null)
+                        {
+                            var base64 = Convert.ToBase64String(item.ImageFileContent);
+                            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                                        <img src="@imgSrc" style="max-width:120px; max-height:120px;" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/img/nopic.png" style="max-width:120px; max-height:120px;" />
+                                                    }
+                                                </td>
+                                            </tr>
+                                                            }
+
+                                                        }
+
+                                </table>
+
+                                <table class="table table-striped" style="margin-left:2%;margin-right:2%;">
+                                    <tr>
+                                        <th>
+                                            Email
+                                        </th>
+                                        <th>
+                                           Telephone
+                                        </th>
+                                        <th>
+                                           Address
+                                        </th>
+                                        <th>
+                                           Description
+                                        </th>
+                                    </tr>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        if (item.Email.Equals(User.Identity.Name))
+                                        {
+                                            <tr style="text-align:unset;">
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Email)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CompanyAddress)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CompanyDescription)
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    }
+
+                                </table>
+
+
+                                                        }
+

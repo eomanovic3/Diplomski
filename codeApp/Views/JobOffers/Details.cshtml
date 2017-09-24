@@ -1,0 +1,309 @@
+﻿@model  codeApp.Models.JobOffer
+
+@{
+    ViewBag.Title = "Details";
+}
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin;
+@using Microsoft.Owin.Security;
+@using codeApp.Controllers;
+
+
+<h2>@Model.Name (@Model.NumberOfPositions position/s)</h2>
+<table class="table table-striped" style="max-width: 90%;max-height:50%; margin-left:4%;margin-right:4%;">
+    <tr>
+        <th style="padding:5px !important;">
+
+        </th>
+        <th style="padding:5px !important;">
+
+        </th>
+        <th style="padding:5px !important;">
+
+        </th>
+    </tr>
+    <tr>
+        <td style="padding:5px !important;">
+            @{string imgSrc = null;
+
+                if (Model.ApplicationUser.ImageFileContent != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.ApplicationUser.ImageFileContent);
+                    imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    <div class="frameDetails">
+                        <span class="helper"></span>
+                        <img src="@imgSrc" class="slikaJob" />
+                    </div>
+                }
+                else
+                {
+                    <div class="frameDetails">
+                        <span class="helper"></span>
+
+                        <img src="~/img/nopic.png" class="slikaJob" />
+                    </div>
+                }
+            }
+
+        </td>
+
+        <td style="padding:5px !important;">
+            <table class="table table-striped" style="overflow-x:scroll;max-width: 90%;">
+                <tr>
+                    <th style="text-align:center; font-family:Arial; color:black; font-size:1.5em; font-weight:bold; vertical-align: middle !important; padding:5px !important;">
+                        @Model.ApplicationUser.CompanyName
+                    </th>
+                </tr>
+                <tr>
+                    <th style="padding:5px !important;">
+                        @if (User.Identity.IsAuthenticated)
+                    {
+                        if (((JobOffersController)this.ViewContext.Controller).CheckUserFollowings(Model.Userfk) == 0)
+                        {
+                            <input name="submit" type="button" value="Follow " id="@Model.Userfk" class="Follow btn btn-green" style=" background-color:green; color:white; font-size:1em; width:100%;" />
+                        }
+                        else
+                        {
+                            <input name="submit" type="button" value="Unfollow " id="@Model.Userfk" class="Unfollow btn btn-info" style="margin-right:4px; border:solid dimgray; background-color:dimgray; color:white; font-size:1em; width:100%;" />
+                        }
+                    }
+                </th>
+            </tr>
+
+        </table>
+
+
+
+    </td>
+    <td style="text-align:center; font-family:Arial; color:black; font-size:1.2em; font-weight:bold; vertical-align: middle !important; padding:5px !important;">
+        @{ var broj = 0;}
+        @if (((JobOffersController)this.ViewContext.Controller).CheckOffers(Model.Userfk) > 0)
+            {
+                broj = ((JobOffersController)this.ViewContext.Controller).CheckOffers(Model.Userfk);
+            }
+        @{ var articles = 0;}
+        @if (((JobOffersController)this.ViewContext.Controller).CheckArticles(Model.Userfk) > 0)
+            {
+                articles = ((JobOffersController)this.ViewContext.Controller).CheckArticles(Model.Userfk);
+            }
+        <table class="table table-striped">
+            <tr>
+                <th style="padding:5px !important;">
+                    Number of job offers: &emsp; @broj
+                </th>
+            </tr>
+            <tr>
+                <th style="padding:5px !important;">
+                    Number of job articles: &emsp; @articles
+                </th>
+            </tr>
+            <tr>
+                <th style="padding:5px !important;">
+                    <button class="btn btn-info" style="width:100%; margin-bottom:2%;" onclick="location.href='@Url.Action("DetailsOfUser", "Home", new { id=Model.Userfk})'">Check out our profile </button>
+                   @if(User.Identity.IsAuthenticated && ViewData["UserType"].ToString().Equals("Employer")&& Model.Userfk.Equals(User.Identity.GetUserId()))
+                   { 
+                    <button class="btn btn-primary" style="width:100%;" onclick="location.href='@Url.Action("Index", "JobApplications", new { id=Model.ID})'">See who has applied for this job </button>
+}
+                    <h2></h2>
+
+                    @if (User.Identity.IsAuthenticated && ViewData["UserType"].ToString().Equals("Unemployed"))
+                    {
+                        if (((JobOffersController)this.ViewContext.Controller).CheckJobApplications(Model.ID) == 0)
+                        {
+                        <button name="submit" type="button" value="Apply for a job" id="@Model.ID" style="width:100%;" class="Apply btn btn-success" >Apply for a job</button>
+                    }
+                    else
+                    {
+                        <button name="submit" type="button" value="Applied for a job" disabled="disabled"  style="width:100%;" id="@Model.ID" class="Applied btn btn-success" >Applied for a job</button>
+                    }
+                        
+                    }
+                </th>
+            </tr>
+        </table>
+
+    </td>
+</tr>
+</table>
+<table class="table table-striped" style="max-width: 90%; margin-left:4%;margin-right:4%;">
+
+    <tr>
+        <th style="padding:5px !important;">
+            Description
+        </th>
+        <td style="padding:5px !important;">
+            @Model.Description
+        </td>
+    </tr>
+    <tr>
+        <th style="padding:5px !important;">
+            Location
+        </th>
+        <td style="padding:5px !important;">
+            @Model.Location
+        </td>
+    </tr>
+    <tr>
+        <th style="padding:5px !important;">
+            Categories
+        </th>
+        <td style="padding:5px !important;">
+            @if (Model.Software == true)
+            {
+                @Html.DisplayNameFor(model => model.Software); <i class="fa fa-check-square" aria-hidden="true">&emsp;</i>
+            }
+            @if (Model.Hardware == true)
+            {
+                @Html.DisplayNameFor(model => model.Hardware) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+            @if (Model.Accounting == true)
+            {
+                @Html.DisplayNameFor(model => model.Accounting) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+            @if (Model.Administrative == true)
+            {
+                @Html.DisplayNameFor(model => model.Administrative) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+            @if (Model.Architecture == true)
+            {
+                @Html.DisplayNameFor(model => model.Architecture) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+            @if (Model.Banking == true)
+            {
+                @Html.DisplayNameFor(model => model.Banking) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+            @if (Model.Construction == true)
+            {
+                @Html.DisplayNameFor(model => model.Construction) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+            @if (Model.Education == true)
+            {
+                @Html.DisplayNameFor(model => model.Education) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+            @if (Model.Engineering == true)
+            {
+                @Html.DisplayNameFor(model => model.Engineering) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+            @if (Model.Fun == true)
+            {
+                @Html.DisplayNameFor(model => model.Fun) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+            @if (Model.Government == true)
+            {
+                @Html.DisplayNameFor(model => model.Government) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+            @if (Model.Health == true)
+            {
+                @Html.DisplayNameFor(model => model.Health) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+            @if (Model.Insurance == true)
+            {
+                @Html.DisplayNameFor(model => model.Insurance) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+            @if (Model.IT == true)
+            {
+                @Html.DisplayNameFor(model => model.IT) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+            @if (Model.Law == true)
+            {
+                @Html.DisplayNameFor(model => model.Law) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+            @if (Model.Marketing == true)
+            {
+                @Html.DisplayNameFor(model => model.Marketing) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+            @if (Model.MechanicalEngineering == true)
+            {
+                @Html.DisplayNameFor(model => model.MechanicalEngineering) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+            @if (Model.RealEstate == true)
+            {
+                @Html.DisplayNameFor(model => model.RealEstate) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+            @if (Model.Turism == true)
+            {
+                @Html.DisplayNameFor(model => model.Turism) ; <i class="fa fa-check-square" aria-hidden="true"> &emsp;</i>
+            }
+        </td>
+    </tr>
+    <tr>
+        <th style="padding:5px !important;" >
+            Deadline:
+        </th>
+        <td style="padding:5px !important;">
+            @Model.EndDate
+        </td>
+    </tr>
+    <tr>
+        <th style="padding:5px !important;">
+            Mail for sending applications:
+        </th>
+        <td style="padding:5px !important;">
+            @Model.MailForApplication
+        </td>
+    </tr>
+</table>
+
+
+  
+
+
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
+<script>
+
+   
+
+                            $(".Apply").click(function (e) {
+
+                                $(this).hasClass("btn btn-success");
+                                $(this).val("Applied for a job");
+                                $(this).css("background-color", "grey");
+                                $(this).attr("disabled", "disabled");
+                                var id = e.target.id;
+                                $.ajax({
+                                    url: '/JobOffers/SaveJobApplications',
+                                    data: { id: id }
+                                }).done(function () {
+                                    alert('Applied for a job');
+                                    location.reload();
+                                });
+                            });
+
+
+                            $(".Follow").click(function (e) {
+
+                                $(this).hasClass('.Unfollow');
+                                $(this).val("Unfollow");
+                                $(this).css("font-size", "1em");
+                                $(this).css("color", "white");
+                                $(this).css("background-color", "dimgray");
+                                var id = e.target.id;
+                                $.ajax({
+                                    url: '/JobOffers/SaveFollowingsDetails',
+                                    data: { id: id }
+                                }).done(function () {
+                                    alert('Thank you for following us!');
+                                    location.reload();
+                                });
+                            });
+
+                            $(".Unfollow").click(function (e) {
+                                var id = e.target.id;
+                                $(this).val("Follow");
+                                $(this).text("Follow");
+                                $(this).hasClass('.Follow');
+                                $(this).css("font-size", "1em");
+                                $(this).css("color", "white");
+                                $(this).css("background-color", "green");
+                                $.ajax({
+                                    url: '/JobOffers/DeleteUserFollowings',
+                                    data: { id: id }
+                                }).done(function () {
+                                    alert('We will get better, we promise!');
+                                    location.reload();
+                                });
+                            });
+
+</script>

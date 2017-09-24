@@ -1,0 +1,131 @@
+﻿@model  IEnumerable<codeApp.Models.JobOffer>
+
+@{
+    ViewBag.Title = "Latest job offers";
+}
+@using Microsoft.AspNet.Identity;
+<body style="background-color:lightgray;">
+    <h2>Stay tune, new job offers are coming right now!</h2>
+    <h3>You've got skills, we've got job offers</h3>
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (ViewData["UserType"].Equals("Employer"))
+        {
+            <button style="margin-bottom:2px;" class="btn btn-info" onclick="location.href='@Url.Action("Create", "JobOffers")'">Create new job offer</button>
+        }
+    }
+    @using (Html.BeginForm())
+    {
+        <p>
+            Find by name: @Html.TextBox("SearchString", null, new { @style = "width:80%;" })
+            <input type="submit" value="Search" class="btn btn-success" />
+        </p>
+    }
+
+    <section id="ourTeam">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="team_area wow fadeInLeftBig">
+                        <div class="team" style="margin-left:1.5%;margin-right:1.5%;">
+                            <ul class="team_nav" style="margin-right:3%;">
+                                @foreach (var item in Model)
+                                {
+                                    <li>
+                                        <div class="team_img" style="margin-top:2%; ">
+                                            @{string imgSrc = null;
+
+                                                if (item.ApplicationUser.ImageFileContent != null)
+                                                {
+                                                    var base64 = Convert.ToBase64String(item.ApplicationUser.ImageFileContent);
+                                                    imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                                    <div class="frame">
+                                                        <span class="helper"></span>
+                                                
+                                                        <img src="@imgSrc" class="slikaJob" id ="crossBrowser" />
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="frame">
+                                                        <span class="helper"></span>
+
+                                                        <img src="~/img/nopic.png" style="display:inline-block !important;" class="slikaJob" />
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                        <div class="team_content splitit">
+                                            <a class="naslovi" href="@Url.Action("Details", "JobOffers",new { id = item.ID })">
+                                                @item.Name
+                                            </a>
+                                            <p> @item.Location</p>
+                                            @if (item.Userfk.Equals(User.Identity.GetUserId()))
+                                            {
+                                                <a href="@Url.Action("Edit", "JobOffers", new { id = item.ID })">
+                                                    <i class="fa fa-pencil-square-o" style="font-size:30px;" aria-hidden="true"></i>
+                                                </a>
+                                                <a>
+                                                    <i class="fa fa-trash-o del" id="@item.ID" style="font-size:30px;" aria-hidden="true"></i>
+                                                </a>
+                                            }
+                                        </div>
+                                    </li>
+                                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+</body>
+<script>
+            navigator.sayswho = (function () {
+                var ua = navigator.userAgent, tem,
+                    M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+                if (/trident/i.test(M[1])) {
+                    tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
+                    return 'IE ' + (tem[1] || '');
+                }
+                if (M[1] === 'Chrome') {
+                    tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
+                    if (tem != null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
+                }
+                M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
+                if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1]);
+                return M.join(' ');
+            })();
+            var a = navigator.sayswho;
+            if (a.includes("Edge")) {
+                $(".slikaJob").css("display","inline");
+            }
+            else {
+                $(".slikaJob").css("display", "unset");
+               }
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".del").click(function (e) {
+            // use whatever confirm box you want here
+            if (!window.confirm("Are you sure?")) {
+                e.preventDefault();
+            }
+            else {
+                var id = e.target.id;
+                $.ajax({
+                    url: '/JobOffers/DeleteOffer',
+                    data: { id: id }
+                }).done(function () {
+                    location.reload();
+                });
+            }
+
+        });
+    });
+</script>

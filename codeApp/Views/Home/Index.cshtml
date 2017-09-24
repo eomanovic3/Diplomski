@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<!-- End navbar -->
+<!-- start slider section -->
+<section id="sliderSection">
+    <div class="mainslider_area">
+        <!-- Start super slider -->
+        <div id="slides" >
+            <ul class="slides-container">
+                <!-- Start single slider-->
+                <li>
+                    <img src="~/Content/profi.jpg" alt="img">
+                    <div class="slider_caption" style="max-width:70%;">
+                        <h2 style="margin-top:22%; color:darkcyan">Welcome to Lalaland</h2>
+                        <h2 style="color:darkcyan;font-size:1.5em; max-width:100%; background-color: aliceblue;">The platform for business networking</h2>
+                        <p style="color: darkcyan; background-color: aliceblue; font-size: 1.5em; font-weight: 900; font-variant: all-small-caps; letter-spacing: 0.1em;">Success is best when shared with others.</p>
+
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <a href="@Url.Action("Login", "Account")" style="color: darkcyan; background-color: aliceblue; font-size: 1.5em; font-variant: all-small-caps; letter-spacing: 0.22em;" class="naslovi">
+                                <i class="fa fa-play-circle" aria-hidden="true"></i> Let's share it ! <br/>
+                            </a>
+                            <button class="btn btn-success" onclick="location.href='@Url.Action("Login", "Account")'" style=" width: 100%;color: white;background-color: darkcyan; font-size: 1.5em; border:1px solid darkcyan;margin-top:1.5%;">Sign in</button>
+                        }
+                        </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</section>
+<section id="ourTeam" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="team_area wow fadeInLeftBig">
+                    <div class="team_title">
+                        <hr>
+                        <h2>Meet <span style="color:#06d0d8; letter-spacing:0.2em;">Lalaland</span></h2>
+                    </div>
+                    <div class="team">
+                        <ul class="team_nav" style="margin-left:2%; margin-right:2%;">
+                            <li>
+                                <div class="team_img">
+                                    <img src="~/img/jobs.png" alt="team-img" class="jnec">
+                                </div>
+                                <div class="team_content splitit">
+                                    <a class="naslovi" href="@Url.Action("Index", "JobOffers")">
+                                        Jobs
+                                    </a>
+                                    <p>Find the right job for your lifestyle! Don't be <br />afraid of changes.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="team_img">
+                                    <img src="~/img/novosti.png" alt="team-img" class="jnec">
+                                </div>
+                                <div class="team_content splitit">
+@if (User.Identity.IsAuthenticated)
+{
+
+                                    <a class="naslovi" href="@Url.Action("Index", "News")">
+                                        News
+                                    </a>
+}
+else
+{
+
+    <a class="naslovi" href="@Url.Action("Login", "Account")">
+        News
+    </a>
+}
+                                    <p>Top daily articles from your industry. Find out more and add your own perspective!</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="team_img">
+                                    <img src="~/img/avatar.png" alt="team-img" class="jnec">
+                                </div>
+                                <div class="team_content splitit">
+                                    <a class="naslovi" href="@Url.Action("Login", "Account")">
+                                        Account
+                                    </a>
+                                    <p style="width:100%;">Sign in and promote yourself to an employer!<br /> Send your CV! </p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="team_img">
+                                    <img src="~/img/companies.png" alt="team-img" class="jnec">
+                                </div>
+                                <div class="team_content splitit">
+@if (User.Identity.IsAuthenticated)
+{
+
+                                    <a class="naslovi" href="@Url.Action("Companies", "Home")">
+                                        Companies
+                                    </a>
+}
+else
+{
+    <a class="naslovi" href="@Url.Action("Login", "Account")">
+        Companies
+    </a>
+}
+                                    <p style="width:95%;">Find the best and most popular employers in your city or industry.</p>
+                                </div>
+                            </li>
+
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="specialQuote">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 ">
+                <p>"It’s hard to beat a person who never gives up." - <small>BabeRuth</small></p>
+            </div>
+        </div>
+    </div>
+</section>

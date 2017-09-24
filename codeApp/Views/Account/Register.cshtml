@@ -1,0 +1,54 @@
+﻿@model codeApp.Models.RegisterViewModel
+
+<div class="inputForm">
+    <div class="col-md-12">
+        @if (!User.Identity.IsAuthenticated)
+        {
+            using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal col-md-12 ", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <h2><span style="color:#06d0d8">Lalaland</span></h2>
+                <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="klasa">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control klasa", placeholder = "Email" })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                   </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="klasa">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control klasa", placeholder = "Password" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="klasa">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control klasa", placeholder = "Confirm Password" })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+
+                   </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="klasa">
+                        @Html.EnumDropDownListFor(model => model.UserType, htmlAttributes: new { @class = "form-control klasa" })
+                        @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="" form-control klasa">
+                        <input type="submit" value="Register" style="width:100%; margin-bottom:2%;" class="btn btn-info dugme" />
+                        <input type="button" value="Sign In" style="width:100%;" onclick="location.href='@Url.Action("Login", "Account")'" class="btn btn-group-xs" />
+                    </div>
+                </div>
+
+            }
+        }
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

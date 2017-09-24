@@ -1,0 +1,31 @@
+﻿@model codeApp.Models.Contact
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <h2>Send us your feedback</h2>
+    <div class="form-horizontal">
+        <section id="contact">
+
+            <div class="container">
+                       <div class="contact_left wow fadeInLeft">
+                                        <form class="submitphoto_form">
+                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control wpcf7-text", placeholder = "Your name" } })
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control wpcf7-text", placeholder = "Email" } })
+                                            @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control wpcf7-text", placeholder = "Subject" } })
+                                            @Html.EditorFor(model => model.Tell, new { htmlAttributes = new { @class = "form-control wpcf7-text", placeholder = "What would you like to tell us" } })
+                                            <button id="try1" style="width:100%;" class="btn btn-info">Send it to us</button>
+                                        </form>
+                                    </div>
+                                </div>
+            </section>
+    </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
