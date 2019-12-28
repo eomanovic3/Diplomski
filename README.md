@@ -7,4 +7,6 @@ u nastavku će biti prikazane izdvojene sekcije aplikacije:
  Vijesti – Omogućeno je kreiranje vijesti/statusa od strane registrovanih korisnika kao i pregled tih vijesti ukoliko pratite određenog korisnika/kompanije. 
  
  Profil – Svaki korisnik će imati mogućnost logina, registracije svog profila, a nakon registracije i mogućnost uređivanja svog podataka profila, mijenjanja logo
- znaka kompanije ili profilne slike. Nezaposleni će imati mogućnost i dodavanja svog CV- a
+ znaka kompanije ili profilne slike. Nezaposleni će imati mogućnost i dodavanja svog CV- a.
+
+LINK: http://codeapp20170906010729.azurewebsites.net/
